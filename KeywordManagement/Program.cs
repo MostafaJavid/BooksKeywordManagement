@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace KeywordManagement
 {
@@ -14,11 +15,10 @@ namespace KeywordManagement
         [STAThread]
         static void Main()
         {
-            //Database.SetInitializer<BloggingContext>(null);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain());
+            
         }
     }
 }

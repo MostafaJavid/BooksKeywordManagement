@@ -17,7 +17,11 @@ namespace KeywordManagement
         [Required]
         public string Content { get; set; }
 
+        public Keyword Parent { get; set; }
+
         public virtual List<Sentence> Sentences { get; set; }
+
+        public virtual List<Keyword> Childs { get; set; }
 
     }
 
@@ -86,7 +90,7 @@ namespace KeywordManagement
     //    public virtual List<Book> Books { get; set; }
     //}
 
-    public class MyContext : DbContext
+    public class KeywordManagementContext : DbContext
     {
         public DbSet<Keyword> Keywords { get; set; }
         public DbSet<Sentence> Sentences { get; set; }

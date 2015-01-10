@@ -28,7 +28,7 @@ namespace KeywordManagement
 
         public static void initSampleDB()
         {
-            using (var db = new MyContext())
+            using (var db = new KeywordManagementContext())
             {
                 var author = new Author() { FullName = "حضرت استاد علامه حسن زاده آملی" };
                 var books = new Dictionary<int, Book>();

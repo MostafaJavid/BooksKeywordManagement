@@ -11,7 +11,8 @@ namespace KeywordManagement
 {
     public partial class frmKeyword : Form
     {
-        int? instanceToUpdate;
+        Keyword keyword;
+
         public frmKeyword()
         {
             InitializeComponent();
@@ -23,11 +24,11 @@ namespace KeywordManagement
 
         }
 
-        public frmKeyword(int? id, string content)
+        public frmKeyword(Keyword keyword)
             : this()
         {
-            this.instanceToUpdate = id;
-            this.textBox1.Text = content;
+            this.keyword = keyword;
+            this.textBox1.Text = keyword == null ? "" : keyword.Content;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -35,16 +36,18 @@ namespace KeywordManagement
             Utils.DoWithWait(this, () =>
             {
                 string key = textBox1.Text;
-                using (var db = new MyContext())
+                using (var db = new KeywordManagementContext())
                 {
-                    if (instanceToUpdate == null)
+                    if (keyword == null)
                     {
                         db.Keywords.Add(new Keyword() { Content = key });
                     }
                     else
-                    {
-                        var old = db.Keywords.Where(k => k.KeywordId == instanceToUpdate).Single();
-                        old.Content = key;
+                    {                        
+                        var old = db.Keywords.Where(k => k.KeywordId == this.keyword.KeywordId).Single();
+                        var child = new Keyword() { Content = key };
+                        child.Parent = old;
+                        old.Childs.Add(child);
                     }
                     db.SaveChanges();
                 }

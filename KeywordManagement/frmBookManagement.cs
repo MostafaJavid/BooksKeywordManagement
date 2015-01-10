@@ -26,7 +26,7 @@ namespace KeywordManagement
             Utils.DoWithWait(this, () =>
             {
                 var title = txtTitle.Text;
-                using (var db = new MyContext())
+                using (var db = new KeywordManagementContext())
                 {
                     var books = db.Books.Where(b => b.Title != null && b.Title.Contains(title)).ToList();
                     grdBooks.DataSource = books.Select(b => new SearchResult(b)).ToList();
@@ -41,7 +41,7 @@ namespace KeywordManagement
                 if (grdBooks.SelectedRows != null && grdBooks.SelectedRows.Count > 0)
                 {
                     var id = Convert.ToInt32(grdBooks.SelectedRows[0].Cells["BookId"].Value);
-                    using (var db = new MyContext())
+                    using (var db = new KeywordManagementContext())
                     {
                         var book = db.Books.Where(b => b.BookId == id).Single();
                         db.Books.Remove(book);

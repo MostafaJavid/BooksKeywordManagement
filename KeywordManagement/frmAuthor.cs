@@ -30,7 +30,7 @@ namespace KeywordManagement
             Utils.DoWithWait(this, () =>
             {
                 string key = textBox1.Text;
-                using (var db = new MyContext())
+                using (var db = new KeywordManagementContext())
                 {
                     if (instanceToUpdate == null)
                     {
