@@ -28,7 +28,7 @@ namespace KeywordManagement
             var treeNode = treeKeywords.SelectedNode;
             if (treeNode != null)
             {
-                CreateOrUpdateKeyword(Convert.ToInt32(treeNode.Tag.ToString()), treeNode.Text);
+                CreateOrUpdateKeyword(treeNode.Tag);
             }
         }
 
@@ -44,7 +44,7 @@ namespace KeywordManagement
                     {
                         var node = new TreeNode(k.Content)
                         {
-                            Tag = k.KeywordId,
+                            Tag = k,
                         };
                         node.ContextMenuStrip = treeMenu;
                         treeKeywords.Nodes.Add(node);
@@ -69,12 +69,12 @@ namespace KeywordManagement
 
         private void btnKeywordAdd_Click(object sender, EventArgs e)
         {
-            CreateOrUpdateKeyword(null, null);
+            CreateOrUpdateKeyword(null);
         }
 
-        private void CreateOrUpdateKeyword(int? id, string content)
+        private void CreateOrUpdateKeyword(Keyword? keyword)
         {
-            frmKeyword frm = new frmKeyword(id, content);
+            frmKeyword frm = new frmKeyword(keyword.Value.KeywordId, "");
             frm.Show();
         }
 
