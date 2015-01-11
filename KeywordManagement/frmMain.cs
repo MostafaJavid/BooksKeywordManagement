@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeywordManagement.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +30,7 @@ namespace KeywordManagement
             var treeNode = treeKeywords.SelectedNode;
             if (treeNode != null)
             {
-                CreateOrUpdateKeyword((Keyword)treeNode.Tag);
+                CreateOrUpdateKeyword(treeNode, FormMode.Update);
             }
         }
 
@@ -108,12 +109,12 @@ namespace KeywordManagement
 
         private void btnKeywordAdd_Click(object sender, EventArgs e)
         {
-            CreateOrUpdateKeyword(treeKeywords.SelectedNode == null ? null : (Keyword)treeKeywords.SelectedNode.Tag);
+            CreateOrUpdateKeyword(treeKeywords.SelectedNode ?? treeKeywords.Nodes[0], FormMode.Create);
         }
 
-        private void CreateOrUpdateKeyword(Keyword keyword)
+        private void CreateOrUpdateKeyword(TreeNode treeNode, FormMode formMode)
         {
-            frmKeyword frm = new frmKeyword(keyword);
+            frmKeyword frm = new frmKeyword(treeNode, formMode, (keyword => { return this.newTreeNode(keyword); }));
             frm.Show();
         }
 

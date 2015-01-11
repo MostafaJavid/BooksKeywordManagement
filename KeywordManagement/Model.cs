@@ -12,6 +12,7 @@ namespace KeywordManagement
         public Keyword()
         {
             this.Sentences = new List<Sentence>();
+            this.Childs = new List<Keyword>();
         }
         public int KeywordId { get; set; }
         [Required]

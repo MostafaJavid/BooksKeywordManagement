@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeywordManagement.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +12,9 @@ namespace KeywordManagement
 {
     public partial class frmKeyword : Form
     {
-        Keyword keyword;
+        TreeNode treeNode;
+        FormMode formMode;
+        Func<Keyword, TreeNode> createTreeNode;
 
         public frmKeyword()
         {
@@ -24,11 +27,15 @@ namespace KeywordManagement
 
         }
 
-        public frmKeyword(Keyword keyword)
+        public frmKeyword(TreeNode treeNode, FormMode formMode, Func<Keyword, TreeNode> createTreeNode)
             : this()
         {
-            this.keyword = keyword;
-            this.textBox1.Text = keyword == null ? "" : keyword.Content;
+            if (treeNode == null)
+                throw new ArgumentException();
+            this.treeNode = treeNode;
+            this.formMode = formMode;
+            this.createTreeNode = createTreeNode;
+            this.textBox1.Text = treeNode.Tag == null ? "" : ((Keyword)treeNode.Tag).Content;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -38,21 +45,23 @@ namespace KeywordManagement
                 string key = textBox1.Text;
                 using (var db = new KeywordManagementContext())
                 {
-                    if (keyword == null)
+                    switch (this.formMode)
                     {
-                        db.Keywords.Add(new Keyword() { Content = key });
+                        case FormMode.Create:
+                            var keyword = new Keyword() { Content = key, Parent = (Keyword)treeNode.Tag  };
+                            db.Keywords.Add(keyword);
+                            db.SaveChanges();                            
+                            treeNode.Nodes.Add(this.createTreeNode(keyword));
+                            break;
+                        case FormMode.Update:
+                            this.treeNode.Tag = keyword = db.Keywords.Where(k => k.KeywordId == ((Keyword)this.treeNode.Tag).KeywordId).Single();
+                            this.treeNode.Text = keyword.Content = key;
+                            db.SaveChanges();
+                            break;
                     }
-                    else
-                    {                        
-                        var old = db.Keywords.Where(k => k.KeywordId == this.keyword.KeywordId).Single();
-                        var child = new Keyword() { Content = key };
-                        child.Parent = old;
-                        old.Childs.Add(child);
-                    }
-                    db.SaveChanges();
                 }
             });
-            MessageBox.Show("عملیات با موفقیت انجام شد" + "\n" + "لطفا برای دیدن اطلاعات بروزرسانی شده لطفا مجددا جستجو نمایید");
+            //MessageBox.Show("عملیات با موفقیت انجام شد" + "\n" + "لطفا برای دیدن اطلاعات بروزرسانی شده لطفا مجددا جستجو نمایید");
             this.Close();
         }
 

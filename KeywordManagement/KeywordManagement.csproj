@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbMigrationsConfiguratio.cs" />
+    <Compile Include="Domain\FormMode.cs" />
     <Compile Include="frmAuthor.cs">
       <SubType>Form</SubType>
     </Compile>
