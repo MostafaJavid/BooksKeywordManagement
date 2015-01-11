@@ -48,17 +48,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.grpRefrences = new System.Windows.Forms.GroupBox();
             this.grdReferences = new System.Windows.Forms.DataGridView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.منواصلیToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.مدیریتکتابهاToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.مدیریتنویسندگانToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.خروجToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.initDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BookTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PageNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Author0_FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +58,19 @@
             this.ReferenceDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReferenceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BookId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.منواصلیToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.مدیریتکتابهاToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.مدیریتنویسندگانToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.خروجToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.initDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.InsertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -92,9 +94,9 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.Location = new System.Drawing.Point(0, 27);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -167,9 +169,9 @@
             // 
             // grpTree
             // 
-            this.grpTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpTree.Controls.Add(this.treeKeywords);
             this.grpTree.Location = new System.Drawing.Point(0, 79);
             this.grpTree.Name = "grpTree";
@@ -328,100 +330,6 @@
             this.grdReferences.Size = new System.Drawing.Size(732, 127);
             this.grdReferences.TabIndex = 5;
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.button3);
-            this.panel3.Controls.Add(this.button4);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(3, 16);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(732, 31);
-            this.panel3.TabIndex = 4;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button3.Location = new System.Drawing.Point(292, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "افزودن";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button4.Location = new System.Drawing.Point(372, 2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "جستجو";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // treeMenu
-            // 
-            this.treeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.refreshToolStripMenuItem});
-            this.treeMenu.Name = "treeMenu";
-            this.treeMenu.Size = new System.Drawing.Size(120, 26);
-            // 
-            // refreshToolStripMenuItem
-            // 
-            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.refreshToolStripMenuItem.Text = "بروزسانی";
-            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.منواصلیToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(926, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // منواصلیToolStripMenuItem
-            // 
-            this.منواصلیToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.مدیریتکتابهاToolStripMenuItem,
-            this.مدیریتنویسندگانToolStripMenuItem,
-            this.خروجToolStripMenuItem,
-            this.initDBToolStripMenuItem});
-            this.منواصلیToolStripMenuItem.Name = "منواصلیToolStripMenuItem";
-            this.منواصلیToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.منواصلیToolStripMenuItem.Text = "منو اصلی";
-            // 
-            // مدیریتکتابهاToolStripMenuItem
-            // 
-            this.مدیریتکتابهاToolStripMenuItem.Name = "مدیریتکتابهاToolStripMenuItem";
-            this.مدیریتکتابهاToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-            this.مدیریتکتابهاToolStripMenuItem.Text = "مدیریت کتاب ها";
-            this.مدیریتکتابهاToolStripMenuItem.Click += new System.EventHandler(this.BookManagementToolStripMenuItem_Click);
-            // 
-            // مدیریتنویسندگانToolStripMenuItem
-            // 
-            this.مدیریتنویسندگانToolStripMenuItem.Name = "مدیریتنویسندگانToolStripMenuItem";
-            this.مدیریتنویسندگانToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-            this.مدیریتنویسندگانToolStripMenuItem.Text = "افزودن نویسنده";
-            this.مدیریتنویسندگانToolStripMenuItem.Click += new System.EventHandler(this.AuthorManagementToolStripMenuItem_Click);
-            // 
-            // خروجToolStripMenuItem
-            // 
-            this.خروجToolStripMenuItem.Name = "خروجToolStripMenuItem";
-            this.خروجToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-            this.خروجToolStripMenuItem.Text = "خروج";
-            this.خروجToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
-            // 
-            // initDBToolStripMenuItem
-            // 
-            this.initDBToolStripMenuItem.Name = "initDBToolStripMenuItem";
-            this.initDBToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-            this.initDBToolStripMenuItem.Text = "InitDB";
-            this.initDBToolStripMenuItem.Click += new System.EventHandler(this.initDBToolStripMenuItem_Click);
-            // 
             // BookTitle
             // 
             this.BookTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -429,7 +337,7 @@
             this.BookTitle.HeaderText = "نام کتاب";
             this.BookTitle.Name = "BookTitle";
             this.BookTitle.ReadOnly = true;
-            this.BookTitle.Width = 71;
+            this.BookTitle.Width = 66;
             // 
             // PageNumber
             // 
@@ -438,7 +346,7 @@
             this.PageNumber.HeaderText = "شماره صفحه";
             this.PageNumber.Name = "PageNumber";
             this.PageNumber.ReadOnly = true;
-            this.PageNumber.Width = 90;
+            this.PageNumber.Width = 83;
             // 
             // Author0_FullName
             // 
@@ -447,7 +355,7 @@
             this.Author0_FullName.HeaderText = "نام نویسنده اول";
             this.Author0_FullName.Name = "Author0_FullName";
             this.Author0_FullName.ReadOnly = true;
-            this.Author0_FullName.Width = 97;
+            this.Author0_FullName.Width = 96;
             // 
             // Author1_FullName
             // 
@@ -457,7 +365,6 @@
             this.Author1_FullName.Name = "Author1_FullName";
             this.Author1_FullName.ReadOnly = true;
             this.Author1_FullName.Visible = false;
-            this.Author1_FullName.Width = 97;
             // 
             // BookPublicationYear
             // 
@@ -509,6 +416,117 @@
             this.BookId.Name = "BookId";
             this.BookId.ReadOnly = true;
             this.BookId.Visible = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.button3);
+            this.panel3.Controls.Add(this.button4);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(3, 16);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(732, 31);
+            this.panel3.TabIndex = 4;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button3.Location = new System.Drawing.Point(292, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "افزودن";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button4.Location = new System.Drawing.Point(372, 2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 0;
+            this.button4.Text = "جستجو";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // treeMenu
+            // 
+            this.treeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.InsertToolStripMenuItem,
+            this.refreshToolStripMenuItem,
+            this.RemoveToolStripMenuItem});
+            this.treeMenu.Name = "treeMenu";
+            this.treeMenu.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.treeMenu.Size = new System.Drawing.Size(153, 92);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.refreshToolStripMenuItem.Text = "ویرایش";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+            // 
+            // RemoveToolStripMenuItem
+            // 
+            this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
+            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.RemoveToolStripMenuItem.Text = "حذف";
+            this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.منواصلیToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(926, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // منواصلیToolStripMenuItem
+            // 
+            this.منواصلیToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.مدیریتکتابهاToolStripMenuItem,
+            this.مدیریتنویسندگانToolStripMenuItem,
+            this.خروجToolStripMenuItem,
+            this.initDBToolStripMenuItem});
+            this.منواصلیToolStripMenuItem.Name = "منواصلیToolStripMenuItem";
+            this.منواصلیToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.منواصلیToolStripMenuItem.Text = "منو اصلی";
+            // 
+            // مدیریتکتابهاToolStripMenuItem
+            // 
+            this.مدیریتکتابهاToolStripMenuItem.Name = "مدیریتکتابهاToolStripMenuItem";
+            this.مدیریتکتابهاToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.مدیریتکتابهاToolStripMenuItem.Text = "مدیریت کتاب ها";
+            this.مدیریتکتابهاToolStripMenuItem.Click += new System.EventHandler(this.BookManagementToolStripMenuItem_Click);
+            // 
+            // مدیریتنویسندگانToolStripMenuItem
+            // 
+            this.مدیریتنویسندگانToolStripMenuItem.Name = "مدیریتنویسندگانToolStripMenuItem";
+            this.مدیریتنویسندگانToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.مدیریتنویسندگانToolStripMenuItem.Text = "افزودن نویسنده";
+            this.مدیریتنویسندگانToolStripMenuItem.Click += new System.EventHandler(this.AuthorManagementToolStripMenuItem_Click);
+            // 
+            // خروجToolStripMenuItem
+            // 
+            this.خروجToolStripMenuItem.Name = "خروجToolStripMenuItem";
+            this.خروجToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.خروجToolStripMenuItem.Text = "خروج";
+            this.خروجToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            // 
+            // initDBToolStripMenuItem
+            // 
+            this.initDBToolStripMenuItem.Name = "initDBToolStripMenuItem";
+            this.initDBToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.initDBToolStripMenuItem.Text = "InitDB";
+            this.initDBToolStripMenuItem.Click += new System.EventHandler(this.initDBToolStripMenuItem_Click);
+            // 
+            // InsertToolStripMenuItem
+            // 
+            this.InsertToolStripMenuItem.Name = "InsertToolStripMenuItem";
+            this.InsertToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.InsertToolStripMenuItem.Text = "ایجاد";
+            this.InsertToolStripMenuItem.Click += new System.EventHandler(this.InsertToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -589,6 +607,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ReferenceDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReferenceId;
         private System.Windows.Forms.DataGridViewTextBoxColumn BookId;
+        private System.Windows.Forms.ToolStripMenuItem RemoveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem InsertToolStripMenuItem;
     }
 }
 

@@ -186,5 +186,31 @@ namespace KeywordManagement
             frm.Show();
         }
 
+        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var treeNode = treeKeywords.SelectedNode;
+            if (treeNode == null || treeNode.Parent == null)
+                return;
+            Utils.DoWithWait(this, () =>
+            {
+                using (var db = new KeywordManagementContext())
+                {
+                    var keyword = treeNode.Tag as Keyword;
+                    db.Keywords.Attach(keyword);
+                    db.Keywords.Remove(keyword);
+                    if (keyword.Parent != null)
+                    {
+                        keyword.Parent.Childs.Remove(keyword);
+                    }
+                    db.SaveChanges();
+                    treeNode.Parent.Nodes.Remove(treeNode);
+                }
+            });
+        }
+
+        private void InsertToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateOrUpdateKeyword(treeKeywords.SelectedNode ?? treeKeywords.Nodes[0], FormMode.Create);
+        }
     }
 }

@@ -45,16 +45,20 @@ namespace KeywordManagement
                 string key = textBox1.Text;
                 using (var db = new KeywordManagementContext())
                 {
+                    var keyword = default(Keyword);
                     switch (this.formMode)
                     {
                         case FormMode.Create:
-                            var keyword = new Keyword() { Content = key, Parent = (Keyword)treeNode.Tag  };
+                            var parent = treeNode.Tag as Keyword;
+                            if (parent != null) { parent = db.Keywords.Attach(parent); }
+                            keyword = new Keyword() { Content = key, Parent = parent  };
                             db.Keywords.Add(keyword);
                             db.SaveChanges();                            
                             treeNode.Nodes.Add(this.createTreeNode(keyword));
+                            treeNode.BackColor = Color.LightSkyBlue;
                             break;
                         case FormMode.Update:
-                            this.treeNode.Tag = keyword = db.Keywords.Where(k => k.KeywordId == ((Keyword)this.treeNode.Tag).KeywordId).Single();
+                            this.treeNode.Tag = keyword = db.Keywords.Attach((Keyword)this.treeNode.Tag);
                             this.treeNode.Text = keyword.Content = key;
                             db.SaveChanges();
                             break;
