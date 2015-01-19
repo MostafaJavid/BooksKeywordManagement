@@ -75,6 +75,11 @@ namespace KeywordManagement
 
     public class Author
     {
+        public Author()
+        {
+            Books = new List<Book>();
+        }
+
         public int AuthorId { get; set; }
         [Required]
         public string FullName { get; set; }

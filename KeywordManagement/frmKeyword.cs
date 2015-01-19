@@ -66,6 +66,7 @@ namespace KeywordManagement
                 }
             });
             //MessageBox.Show("عملیات با موفقیت انجام شد" + "\n" + "لطفا برای دیدن اطلاعات بروزرسانی شده لطفا مجددا جستجو نمایید");
+            this.treeNode.TreeView.Sort();
             this.Close();
         }
 

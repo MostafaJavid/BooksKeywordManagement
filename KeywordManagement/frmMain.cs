@@ -15,6 +15,7 @@ namespace KeywordManagement
         public frmMain()
         {
             InitializeComponent();
+            treeKeywords.TreeViewNodeSorter = new TreeContentComparer();
             this.Load += new EventHandler(frmMain_Load);
         }
 
@@ -109,7 +110,7 @@ namespace KeywordManagement
 
         private void btnKeywordAdd_Click(object sender, EventArgs e)
         {
-            CreateOrUpdateKeyword(treeKeywords.SelectedNode ?? treeKeywords.Nodes[0], FormMode.Create);
+            CreateOrUpdateKeyword(/*treeKeywords.SelectedNode ?? */treeKeywords.Nodes[0], FormMode.Create);
         }
 
         private void CreateOrUpdateKeyword(TreeNode treeNode, FormMode formMode)
@@ -117,7 +118,6 @@ namespace KeywordManagement
             frmKeyword frm = new frmKeyword(treeNode, formMode, (keyword => { return this.newTreeNode(keyword); }));
             frm.Show();
         }
-
 
         private void treeKeywords_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -161,7 +161,6 @@ namespace KeywordManagement
             }
 
         }
-
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -211,6 +210,60 @@ namespace KeywordManagement
         private void InsertToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CreateOrUpdateKeyword(treeKeywords.SelectedNode ?? treeKeywords.Nodes[0], FormMode.Create);
+        }
+
+        private void btnAddSentences_Click(object sender, EventArgs e)
+        {
+            if (treeKeywords.SelectedNode == null || treeKeywords.SelectedNode.Tag == null)
+                return;
+            var frmSentence = new frmSentence((Keyword)treeKeywords.SelectedNode.Tag, FormMode.Create);
+            frmSentence.Show();
+            frmSentence.FormClosed += frmSentence_FormClosed;
+        }
+
+        void frmSentence_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (treeKeywords.SelectedNode != null && treeKeywords.SelectedNode.Tag != null)
+            {
+                using (var db = new KeywordManagementContext())
+                {                    
+                    var keyword = (Keyword)treeKeywords.SelectedNode.Tag;
+                    db.Keywords.Attach(keyword);
+                    var index = grdSentences.Rows.Count == keyword.Sentences.Count ? this.grdSentences.CurrentRow.Index : keyword.Sentences.Count - 1;
+                    this.grdSentences.DataSource = keyword.Sentences;
+                    this.grdSentences.Refresh();
+                    this.grdSentences.ClearSelection();
+                    this.grdSentences.Rows[index].Selected = true;
+                }
+            }
+        }
+
+        private void btnSearchSentence_Click(object sender, EventArgs e)
+        {
+            if (treeKeywords.SelectedNode != null && treeKeywords.SelectedNode.Tag != null)
+            {
+                using (var db = new KeywordManagementContext())
+                {
+                    var keyword = (Keyword)treeKeywords.SelectedNode.Tag;
+                    db.Keywords.Attach(keyword);
+                    this.grdSentences.DataSource = keyword.Sentences.Where(sentence => sentence.Content.Contains(textSentenceSearch.Text)).ToList();
+                }
+            }
+        }
+
+        private void btnAddReference_Click(object sender, EventArgs e)
+        {
+            if (treeKeywords.SelectedNode == null || treeKeywords.SelectedNode.Tag == null || grdSentences.SelectedRows.Count == 0)
+                return;
+            Sentence theSentence = null;
+            using (var db = new KeywordManagementContext())
+            {
+                var sentenceId = Convert.ToInt32(grdSentences.SelectedRows[0].Cells["SentenceId"].Value);
+                theSentence = db.Sentences.FirstOrDefault(sentence => sentence.SentenceId == sentenceId);
+            }
+            var frmSentence = new frmSentence(theSentence, FormMode.Update);
+            frmSentence.Show();
+            frmSentence.FormClosed += frmSentence_FormClosed;
         }
     }
 }

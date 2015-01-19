@@ -44,8 +44,9 @@
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SentenceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.textSentenceSearch = new System.Windows.Forms.TextBox();
+            this.btnAddSentence = new System.Windows.Forms.Button();
+            this.btnSearchSentence = new System.Windows.Forms.Button();
             this.grpRefrences = new System.Windows.Forms.GroupBox();
             this.grdReferences = new System.Windows.Forms.DataGridView();
             this.BookTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,9 +60,10 @@
             this.ReferenceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BookId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnAddReference = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.InsertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -70,7 +72,6 @@
             this.مدیریتنویسندگانToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.خروجToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.initDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.InsertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -266,33 +267,44 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.textSentenceSearch);
+            this.panel2.Controls.Add(this.btnAddSentence);
+            this.panel2.Controls.Add(this.btnSearchSentence);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(3, 16);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(732, 31);
             this.panel2.TabIndex = 3;
             // 
-            // button1
+            // textSentenceSearch
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button1.Location = new System.Drawing.Point(292, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "افزودن";
-            this.button1.UseVisualStyleBackColor = true;
+            this.textSentenceSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textSentenceSearch.Location = new System.Drawing.Point(453, 5);
+            this.textSentenceSearch.Name = "textSentenceSearch";
+            this.textSentenceSearch.Size = new System.Drawing.Size(276, 20);
+            this.textSentenceSearch.TabIndex = 2;
             // 
-            // button2
+            // btnAddSentence
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button2.Location = new System.Drawing.Point(372, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "جستجو";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnAddSentence.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnAddSentence.Location = new System.Drawing.Point(292, 3);
+            this.btnAddSentence.Name = "btnAddSentence";
+            this.btnAddSentence.Size = new System.Drawing.Size(75, 23);
+            this.btnAddSentence.TabIndex = 1;
+            this.btnAddSentence.Text = "افزودن";
+            this.btnAddSentence.UseVisualStyleBackColor = true;
+            this.btnAddSentence.Click += new System.EventHandler(this.btnAddSentences_Click);
+            // 
+            // btnSearchSentence
+            // 
+            this.btnSearchSentence.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnSearchSentence.Location = new System.Drawing.Point(372, 2);
+            this.btnSearchSentence.Name = "btnSearchSentence";
+            this.btnSearchSentence.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchSentence.TabIndex = 0;
+            this.btnSearchSentence.Text = "جستجو";
+            this.btnSearchSentence.UseVisualStyleBackColor = true;
+            this.btnSearchSentence.Click += new System.EventHandler(this.btnSearchSentence_Click);
             // 
             // grpRefrences
             // 
@@ -419,7 +431,7 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.button3);
+            this.panel3.Controls.Add(this.btnAddReference);
             this.panel3.Controls.Add(this.button4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(3, 16);
@@ -427,15 +439,16 @@
             this.panel3.Size = new System.Drawing.Size(732, 31);
             this.panel3.TabIndex = 4;
             // 
-            // button3
+            // btnAddReference
             // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button3.Location = new System.Drawing.Point(292, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "افزودن";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnAddReference.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnAddReference.Location = new System.Drawing.Point(292, 3);
+            this.btnAddReference.Name = "btnAddReference";
+            this.btnAddReference.Size = new System.Drawing.Size(75, 23);
+            this.btnAddReference.TabIndex = 1;
+            this.btnAddReference.Text = "افزودن";
+            this.btnAddReference.UseVisualStyleBackColor = true;
+            this.btnAddReference.Click += new System.EventHandler(this.btnAddReference_Click);
             // 
             // button4
             // 
@@ -455,19 +468,26 @@
             this.RemoveToolStripMenuItem});
             this.treeMenu.Name = "treeMenu";
             this.treeMenu.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.treeMenu.Size = new System.Drawing.Size(153, 92);
+            this.treeMenu.Size = new System.Drawing.Size(106, 70);
+            // 
+            // InsertToolStripMenuItem
+            // 
+            this.InsertToolStripMenuItem.Name = "InsertToolStripMenuItem";
+            this.InsertToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.InsertToolStripMenuItem.Text = "ایجاد";
+            this.InsertToolStripMenuItem.Click += new System.EventHandler(this.InsertToolStripMenuItem_Click);
             // 
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.refreshToolStripMenuItem.Text = "ویرایش";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // RemoveToolStripMenuItem
             // 
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
-            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.RemoveToolStripMenuItem.Text = "حذف";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
@@ -521,13 +541,6 @@
             this.initDBToolStripMenuItem.Text = "InitDB";
             this.initDBToolStripMenuItem.Click += new System.EventHandler(this.initDBToolStripMenuItem_Click);
             // 
-            // InsertToolStripMenuItem
-            // 
-            this.InsertToolStripMenuItem.Name = "InsertToolStripMenuItem";
-            this.InsertToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.InsertToolStripMenuItem.Text = "ایجاد";
-            this.InsertToolStripMenuItem.Click += new System.EventHandler(this.InsertToolStripMenuItem_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -554,6 +567,7 @@
             this.grpSentences.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdSentences)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.grpRefrences.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdReferences)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -582,11 +596,11 @@
         private System.Windows.Forms.GroupBox grpRefrences;
         private System.Windows.Forms.DataGridView grdSentences;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAddSentence;
+        private System.Windows.Forms.Button btnSearchSentence;
         private System.Windows.Forms.DataGridView grdReferences;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnAddReference;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Content;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
@@ -609,6 +623,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BookId;
         private System.Windows.Forms.ToolStripMenuItem RemoveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem InsertToolStripMenuItem;
+        private System.Windows.Forms.TextBox textSentenceSearch;
     }
 }
 
