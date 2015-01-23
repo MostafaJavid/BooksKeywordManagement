@@ -227,11 +227,9 @@ namespace KeywordManagement
             {
                 using (var db = new KeywordManagementContext())
                 {                    
-                    var keyword = (Keyword)treeKeywords.SelectedNode.Tag;
-                    db.Keywords.Attach(keyword);
+                    var keyword = db.Keywords.FirstOrDefault(word => word.KeywordId == ((Keyword)treeKeywords.SelectedNode.Tag).KeywordId);
                     var index = grdSentences.Rows.Count == keyword.Sentences.Count ? this.grdSentences.CurrentRow.Index : keyword.Sentences.Count - 1;
                     this.grdSentences.DataSource = keyword.Sentences;
-                    this.grdSentences.Refresh();
                     this.grdSentences.ClearSelection();
                     this.grdSentences.Rows[index].Selected = true;
                 }
