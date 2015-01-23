@@ -13,15 +13,13 @@ namespace KeywordManagement
         private Sentence sentence;
         private IContainer components;
         private Label label1;
-        private TextBox textBox1;
-        private TextBox txtBookTitle;
+        private TextBox txtSentence;
         private Label label2;
-        private TextBox txtAuthorName;
         private Label label3;
-        private TextBox textBox4;
+        private TextBox txtPageNo;
         private Label label4;
         private Label label5;
-        private TextBox textBox5;
+        private TextBox txtDescription;
         private Button bntSave;
         private Button btnCancle;
         protected override void Dispose(bool disposing)
@@ -35,17 +33,17 @@ namespace KeywordManagement
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.txtBookTitle = new System.Windows.Forms.TextBox();
+            this.txtSentence = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtAuthorName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtPageNo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtDescription = new System.Windows.Forms.TextBox();
             this.bntSave = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
+            this.cbBookTitle = new System.Windows.Forms.ComboBox();
+            this.cbAuthor = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -59,23 +57,14 @@ namespace KeywordManagement
             this.label1.TabIndex = 0;
             this.label1.Text = "جمله:";
             // 
-            // textBox1
+            // txtSentence
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSentence.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(12, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(542, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // txtBookTitle
-            // 
-            this.txtBookTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookTitle.Location = new System.Drawing.Point(271, 38);
-            this.txtBookTitle.Name = "txtBookTitle";
-            this.txtBookTitle.Size = new System.Drawing.Size(262, 20);
-            this.txtBookTitle.TabIndex = 2;
+            this.txtSentence.Location = new System.Drawing.Point(12, 6);
+            this.txtSentence.Name = "txtSentence";
+            this.txtSentence.Size = new System.Drawing.Size(542, 20);
+            this.txtSentence.TabIndex = 1;
             // 
             // label2
             // 
@@ -88,15 +77,6 @@ namespace KeywordManagement
             this.label2.TabIndex = 2;
             this.label2.Text = "نام کتاب:";
             // 
-            // txtAuthorName
-            // 
-            this.txtAuthorName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAuthorName.Location = new System.Drawing.Point(12, 38);
-            this.txtAuthorName.Name = "txtAuthorName";
-            this.txtAuthorName.Size = new System.Drawing.Size(185, 20);
-            this.txtAuthorName.TabIndex = 3;
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -108,14 +88,14 @@ namespace KeywordManagement
             this.label3.TabIndex = 4;
             this.label3.Text = "نام نویسنده:";
             // 
-            // textBox4
+            // txtPageNo
             // 
-            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtPageNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox4.Location = new System.Drawing.Point(455, 72);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(60, 20);
-            this.textBox4.TabIndex = 4;
+            this.txtPageNo.Location = new System.Drawing.Point(455, 72);
+            this.txtPageNo.Name = "txtPageNo";
+            this.txtPageNo.Size = new System.Drawing.Size(60, 20);
+            this.txtPageNo.TabIndex = 4;
             // 
             // label4
             // 
@@ -139,13 +119,13 @@ namespace KeywordManagement
             this.label5.TabIndex = 8;
             this.label5.Text = "توضیحات:";
             // 
-            // textBox5
+            // txtDescription
             // 
-            this.textBox5.Location = new System.Drawing.Point(12, 118);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(574, 198);
-            this.textBox5.TabIndex = 5;
+            this.txtDescription.Location = new System.Drawing.Point(12, 118);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(574, 198);
+            this.txtDescription.TabIndex = 5;
             // 
             // bntSave
             // 
@@ -165,21 +145,42 @@ namespace KeywordManagement
             this.btnCancle.TabIndex = 7;
             this.btnCancle.Text = "انصراف";
             this.btnCancle.UseVisualStyleBackColor = true;
+            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
+            // 
+            // cbBookTitle
+            // 
+            this.cbBookTitle.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBookTitle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cbBookTitle.FormattingEnabled = true;
+            this.cbBookTitle.Location = new System.Drawing.Point(271, 37);
+            this.cbBookTitle.Name = "cbBookTitle";
+            this.cbBookTitle.Size = new System.Drawing.Size(260, 21);
+            this.cbBookTitle.TabIndex = 2;
+            // 
+            // cbAuthor
+            // 
+            this.cbAuthor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbAuthor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cbAuthor.FormattingEnabled = true;
+            this.cbAuthor.Location = new System.Drawing.Point(12, 36);
+            this.cbAuthor.Name = "cbAuthor";
+            this.cbAuthor.Size = new System.Drawing.Size(183, 21);
+            this.cbAuthor.TabIndex = 3;
             // 
             // frmSentence
             // 
             this.ClientSize = new System.Drawing.Size(598, 367);
+            this.Controls.Add(this.cbAuthor);
+            this.Controls.Add(this.cbBookTitle);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.bntSave);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.txtPageNo);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtAuthorName);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtBookTitle);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtSentence);
             this.Controls.Add(this.label1);
             this.Name = "frmSentence";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -188,5 +189,8 @@ namespace KeywordManagement
             this.PerformLayout();
 
         }
+
+        private ComboBox cbBookTitle;
+        private ComboBox cbAuthor;
     }
 }

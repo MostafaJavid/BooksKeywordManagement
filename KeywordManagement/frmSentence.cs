@@ -16,6 +16,11 @@ namespace KeywordManagement
         {
             this.InitializeComponent();
             this.formMode = formMode;
+            using (KeywordManagementContext keywordManagementContext = new KeywordManagementContext()){
+                cbBookTitle.AutoCompleteCustomSource.AddRange(keywordManagementContext.Books.Select(book => book.Title).ToArray());
+                cbAuthor.AutoCompleteCustomSource.AddRange(keywordManagementContext.Authors.Select(author => author.FullName).ToArray());
+            }
+            
         }
         public frmSentence(Keyword keyword, FormMode formMode)
             : this(formMode)
@@ -26,11 +31,15 @@ namespace KeywordManagement
             : this(formMode)
         {
             this.sentence = sentence;
-            this.textBox1.Text = sentence.Content;
-            this.textBox1.Enabled = false;
+            this.txtSentence.Text = sentence.Content;
+            this.txtSentence.Enabled = false;
         }
         private void bntSave_Click(object sender, EventArgs e)
         {
+            var bookTitile = cbBookTitle.Text;
+            var authorName = cbAuthor.Text;
+            if (String.IsNullOrEmpty(txtSentence.Text) || String.IsNullOrEmpty(bookTitile))
+                return;
             Utils.DoWithWait(this, delegate
             {
                 using (KeywordManagementContext keywordManagementContext = new KeywordManagementContext())
@@ -40,32 +49,32 @@ namespace KeywordManagement
                         case FormMode.Create:
                             {
                                 keywordManagementContext.Keywords.Attach(this.keyword);
-                                Book theBook = keywordManagementContext.Books.FirstOrDefault((Book book) => book.Title == this.txtBookTitle.Text);
+                                Book theBook = keywordManagementContext.Books.FirstOrDefault((Book book) => book.Title == bookTitile);
                                 if (theBook == null)
                                 {
                                     Author theAuthor;
-                                    if ((theAuthor = keywordManagementContext.Authors.FirstOrDefault((Author author) => author.FullName == this.txtAuthorName.Text)) == null)
+                                    if ((theAuthor = keywordManagementContext.Authors.FirstOrDefault((Author author) => author.FullName == authorName)) == null)
                                     {
                                         theAuthor = new Author
                                         {
-                                            FullName = this.txtAuthorName.Text
+                                            FullName = authorName
                                         };
                                     }
                                     theBook = new Book
                                     {
-                                        Title = this.txtBookTitle.Text
+                                        Title = bookTitile
                                     };
                                     theAuthor.Books.Add(theBook);
                                     theBook.Authors.Add(theAuthor);
                                 }
                                 Sentence sentence = new Sentence
                                 {
-                                    Content = this.textBox1.Text
+                                    Content = this.txtSentence.Text
                                 };
                                 Reference item = new Reference
                                 {
-                                    Description = this.textBox5.Text,
-                                    PageNumber = this.textBox4.Text,
+                                    Description = this.txtDescription.Text,
+                                    PageNumber = this.txtPageNo.Text,
                                     Sentence = sentence,
                                     Book = theBook
                                 };
@@ -77,28 +86,28 @@ namespace KeywordManagement
                         case FormMode.Update:
                             {
                                 keywordManagementContext.Sentences.Attach(this.sentence);
-                                Book theBook = keywordManagementContext.Books.FirstOrDefault((Book book) => book.Title == this.txtBookTitle.Text);
+                                Book theBook = keywordManagementContext.Books.FirstOrDefault((Book book) => book.Title == bookTitile);
                                 if (theBook == null)
                                 {
                                     Author theAuthor;
-                                    if ((theAuthor = keywordManagementContext.Authors.FirstOrDefault((Author author) => author.FullName == this.txtAuthorName.Text)) == null)
+                                    if ((theAuthor = keywordManagementContext.Authors.FirstOrDefault((Author author) => author.FullName == authorName)) == null)
                                     {
                                         theAuthor = new Author
                                         {
-                                            FullName = this.txtAuthorName.Text
+                                            FullName = authorName
                                         };
                                     }
                                     theBook = new Book
                                     {
-                                        Title = this.txtBookTitle.Text
+                                        Title = bookTitile
                                     };
                                     theAuthor.Books.Add(theBook);
                                     theBook.Authors.Add(theAuthor);
                                 }
                                 Reference item = new Reference
                                 {
-                                    Description = this.textBox5.Text,
-                                    PageNumber = this.textBox4.Text,
+                                    Description = this.txtDescription.Text,
+                                    PageNumber = this.txtPageNo.Text,
                                     Sentence = this.sentence,
                                     Book = theBook
                                 };
@@ -109,6 +118,11 @@ namespace KeywordManagement
                     }
                 }
             });
+            base.Close();
+        }
+
+        private void btnCancle_Click(object sender, EventArgs e)
+        {
             base.Close();
         }
     }

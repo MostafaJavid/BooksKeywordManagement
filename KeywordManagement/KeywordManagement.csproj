@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -85,7 +85,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbMigrationsConfiguratio.cs" />
     <Compile Include="Domain\FormMode.cs" />
     <Compile Include="Domain\TreeContentComparer.cs" />
     <Compile Include="frmAuthor.cs">
@@ -157,7 +156,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
-    <None Include="KeywordManagement_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -185,58 +183,13 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
-      <Visible>False</Visible>
-      <ProductName>SQL Server Compact 3.5 SP2</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
       <Visible>False</Visible>
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="AMD64\sqlceca40.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlcecompact40.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlceer40EN.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlceme40.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlceqp40.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlcese40.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="X86\sqlceca40.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="X86\sqlcecompact40.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="X86\sqlceer40EN.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="X86\sqlceme40.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="X86\sqlceqp40.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="X86\sqlcese40.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
