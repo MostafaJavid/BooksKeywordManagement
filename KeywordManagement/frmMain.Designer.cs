@@ -51,14 +51,7 @@
             this.grdReferences = new System.Windows.Forms.DataGridView();
             this.BookTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PageNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Author0_FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Author1_FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BookPublicationYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BookPublisher = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BookPublishNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReferenceDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ReferenceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BookId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAddReference = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -183,12 +176,14 @@
             // treeKeywords
             // 
             this.treeKeywords.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeKeywords.HideSelection = false;
             this.treeKeywords.Location = new System.Drawing.Point(3, 16);
             this.treeKeywords.Name = "treeKeywords";
             this.treeKeywords.RightToLeftLayout = true;
             this.treeKeywords.Size = new System.Drawing.Size(178, 293);
             this.treeKeywords.TabIndex = 1;
             this.treeKeywords.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeKeywords_AfterSelect);
+            this.treeKeywords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeKeywords_KeyDown);
             // 
             // splitContainer2
             // 
@@ -326,14 +321,7 @@
             this.grdReferences.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.BookTitle,
             this.PageNumber,
-            this.Author0_FullName,
-            this.Author1_FullName,
-            this.BookPublicationYear,
-            this.BookPublisher,
-            this.BookPublishNumber,
-            this.ReferenceDescription,
-            this.ReferenceId,
-            this.BookId});
+            this.ReferenceDescription});
             this.grdReferences.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdReferences.Location = new System.Drawing.Point(3, 47);
             this.grdReferences.Name = "grdReferences";
@@ -349,7 +337,7 @@
             this.BookTitle.HeaderText = "نام کتاب";
             this.BookTitle.Name = "BookTitle";
             this.BookTitle.ReadOnly = true;
-            this.BookTitle.Width = 66;
+            this.BookTitle.Width = 71;
             // 
             // PageNumber
             // 
@@ -358,76 +346,15 @@
             this.PageNumber.HeaderText = "شماره صفحه";
             this.PageNumber.Name = "PageNumber";
             this.PageNumber.ReadOnly = true;
-            this.PageNumber.Width = 83;
-            // 
-            // Author0_FullName
-            // 
-            this.Author0_FullName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Author0_FullName.DataPropertyName = "Author0_FullName";
-            this.Author0_FullName.HeaderText = "نام نویسنده اول";
-            this.Author0_FullName.Name = "Author0_FullName";
-            this.Author0_FullName.ReadOnly = true;
-            this.Author0_FullName.Width = 96;
-            // 
-            // Author1_FullName
-            // 
-            this.Author1_FullName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Author1_FullName.DataPropertyName = "Author1_FullName";
-            this.Author1_FullName.HeaderText = "نام نویسنده دوم";
-            this.Author1_FullName.Name = "Author1_FullName";
-            this.Author1_FullName.ReadOnly = true;
-            this.Author1_FullName.Visible = false;
-            // 
-            // BookPublicationYear
-            // 
-            this.BookPublicationYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.BookPublicationYear.DataPropertyName = "BookPublicationYear";
-            this.BookPublicationYear.HeaderText = "تاریخ نشر کتاب";
-            this.BookPublicationYear.Name = "BookPublicationYear";
-            this.BookPublicationYear.ReadOnly = true;
-            this.BookPublicationYear.Width = 96;
-            // 
-            // BookPublisher
-            // 
-            this.BookPublisher.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.BookPublisher.DataPropertyName = "BookPublisher";
-            this.BookPublisher.HeaderText = "ناشر";
-            this.BookPublisher.Name = "BookPublisher";
-            this.BookPublisher.ReadOnly = true;
-            this.BookPublisher.Width = 54;
-            // 
-            // BookPublishNumber
-            // 
-            this.BookPublishNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.BookPublishNumber.DataPropertyName = "BookPublishNumber";
-            this.BookPublishNumber.HeaderText = "نوبت چاپ";
-            this.BookPublishNumber.Name = "BookPublishNumber";
-            this.BookPublishNumber.ReadOnly = true;
-            this.BookPublishNumber.Width = 70;
+            this.PageNumber.Width = 90;
             // 
             // ReferenceDescription
             // 
             this.ReferenceDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ReferenceDescription.DataPropertyName = "Description";
-            this.ReferenceDescription.HeaderText = "توضیحات";
+            this.ReferenceDescription.HeaderText = "آدرس";
             this.ReferenceDescription.Name = "ReferenceDescription";
             this.ReferenceDescription.ReadOnly = true;
-            // 
-            // ReferenceId
-            // 
-            this.ReferenceId.DataPropertyName = "ReferenceId";
-            this.ReferenceId.HeaderText = "ReferenceId";
-            this.ReferenceId.Name = "ReferenceId";
-            this.ReferenceId.ReadOnly = true;
-            this.ReferenceId.Visible = false;
-            // 
-            // BookId
-            // 
-            this.BookId.DataPropertyName = "BookId";
-            this.BookId.HeaderText = "BookId";
-            this.BookId.Name = "BookId";
-            this.BookId.ReadOnly = true;
-            this.BookId.Visible = false;
             // 
             // panel3
             // 
@@ -611,19 +538,12 @@
         private System.Windows.Forms.ToolStripMenuItem مدیریتنویسندگانToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem خروجToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem initDBToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BookTitle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PageNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Author0_FullName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Author1_FullName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BookPublicationYear;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BookPublisher;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BookPublishNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ReferenceDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ReferenceId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BookId;
         private System.Windows.Forms.ToolStripMenuItem RemoveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem InsertToolStripMenuItem;
         private System.Windows.Forms.TextBox textSentenceSearch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BookTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PageNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReferenceDescription;
     }
 }
 

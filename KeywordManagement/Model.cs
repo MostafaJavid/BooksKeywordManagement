@@ -30,15 +30,13 @@ namespace KeywordManagement
     {
         public Sentence()
         {
-            this.Keywords = new List<Keyword>();
             this.References = new List<Reference>();
         }
         public int SentenceId { get; set; }
         [Required]
         public string Content { get; set; }
         public string Description { get; set; }
-
-        public virtual List<Keyword> Keywords { get; set; }
+        public virtual Keyword Keyword { get; set; }
         public virtual List<Reference> References { get; set; }
     }
 
@@ -98,6 +96,10 @@ namespace KeywordManagement
 
     public class KeywordManagementContext : DbContext
     {
+        public KeywordManagementContext()
+        {
+
+        }
         public DbSet<Keyword> Keywords { get; set; }
         public DbSet<Sentence> Sentences { get; set; }
         public DbSet<Reference> References { get; set; }
@@ -109,12 +111,10 @@ namespace KeywordManagement
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Keyword>()
                    .HasMany<Sentence>(k => k.Sentences)
-                   .WithMany(s => s.Keywords)
+                   .WithRequired(s => s.Keyword)
                    .Map(cs =>
                    {
-                       cs.MapLeftKey("KeywordRefId");
-                       cs.MapRightKey("SentenceRefId");
-                       cs.ToTable("KeywordSentence");
+                       cs.MapKey("KeywordRefId");
                    });
 
             modelBuilder.Entity<Book>()

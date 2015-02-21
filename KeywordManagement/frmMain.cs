@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -12,10 +13,16 @@ namespace KeywordManagement
 {
     public partial class frmMain : Form
     {
+        private IDictionary<int, TreeNode> pickedNodes;
+        private BindingSource bindingSource;
         public frmMain()
         {
             InitializeComponent();
             treeKeywords.TreeViewNodeSorter = new TreeContentComparer();
+            grdSentences.AutoGenerateColumns = false;
+            grdReferences.AutoGenerateColumns = false;
+            bindingSource = new BindingSource();
+            pickedNodes = new Dictionary<int, TreeNode>();
             this.Load += new EventHandler(frmMain_Load);
         }
 
@@ -41,7 +48,8 @@ namespace KeywordManagement
             {
                 string key = textBox1.Text;
                 treeKeywords.Nodes.Clear();
-                treeKeywords.Nodes.Add(new TreeNode("ریشه")
+                pickedNodes.Clear();
+                treeKeywords.Nodes.Add(new TreeNode("*")
                 {
                     Name = "_",
                     ContextMenuStrip = treeMenu,
@@ -49,7 +57,7 @@ namespace KeywordManagement
                 });
                 using (var db = new KeywordManagementContext())
                 {
-                    foreach (var keyword in db.Keywords.Include("Parent").Where(k => !string.IsNullOrEmpty(k.Content) && k.Content.Contains(key)).OrderBy(k => k.Content))
+                    foreach (var keyword in db.Keywords.Include("Parent").OrderBy(k => k.Content))
                     {
                         var root = getRoot(keyword);
                         var newNode = newTreeNode(root, 0, maxDepth, key);
@@ -57,12 +65,22 @@ namespace KeywordManagement
                         {
                             treeKeywords.Nodes[0].Nodes.Add(newNode);
                         }
+                        if (!string.IsNullOrEmpty(key) && keyword.Content.Contains(key))
+                        {
+                            pickedNodes.Add(keyword.KeywordId, newNode);
+                            newNode.BackColor = SystemColors.ControlLight;
+                        }
                     }
                 }
                 treeKeywords.Nodes[0].Expand();
+                if (pickedNodes.Count > 0)
+                {
+                    treeKeywords.SelectedNode = pickedNodes.First().Value;
+                }
+                treeKeywords.Focus();
             });
         }
-
+        
         private TreeNode newTreeNode(Keyword keyword, int depth = 0, int maxDepth = 0, string keySearch = "")
         {
             if (maxDepth > 0 && depth >= maxDepth)
@@ -156,6 +174,11 @@ namespace KeywordManagement
                     {
                         var sentence = db.Sentences.Where(s => s.SentenceId == sentenceId).Single();
                         grdReferences.DataSource = sentence.References.Select(s => new SearchResult(s)).ToList();
+                        //var treeNode = treeKeywords.Nodes.Find(sentence.Keyword.KeywordId.ToString(), true).FirstOrDefault();
+                        //if (treeNode != null)
+                        //{
+                        //    treeKeywords.SelectedNode = treeNode;
+                        //}
                     }
                 });
             }
@@ -215,7 +238,11 @@ namespace KeywordManagement
         private void btnAddSentences_Click(object sender, EventArgs e)
         {
             if (treeKeywords.SelectedNode == null || treeKeywords.SelectedNode.Tag == null)
+            {
+                MessageBox.Show("لطفا یک کلید واژه انتخاب نمایید", "خطا در افزودن جلمه");
                 return;
+            }
+
             var frmSentence = new frmSentence((Keyword)treeKeywords.SelectedNode.Tag, FormMode.Create);
             frmSentence.Show();
             frmSentence.FormClosed += frmSentence_FormClosed;
@@ -226,12 +253,13 @@ namespace KeywordManagement
             if (treeKeywords.SelectedNode != null && treeKeywords.SelectedNode.Tag != null)
             {
                 using (var db = new KeywordManagementContext())
-                {                    
+                {
                     var keyword = db.Keywords.FirstOrDefault(word => word.KeywordId == ((Keyword)treeKeywords.SelectedNode.Tag).KeywordId);
                     var index = grdSentences.Rows.Count == keyword.Sentences.Count ? this.grdSentences.CurrentRow.Index : keyword.Sentences.Count - 1;
                     this.grdSentences.DataSource = keyword.Sentences;
                     this.grdSentences.ClearSelection();
                     this.grdSentences.Rows[index].Selected = true;
+                    treeKeywords.Focus();
                 }
             }
         }
@@ -252,16 +280,51 @@ namespace KeywordManagement
         private void btnAddReference_Click(object sender, EventArgs e)
         {
             if (treeKeywords.SelectedNode == null || treeKeywords.SelectedNode.Tag == null || grdSentences.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("لطفا یک جلمه انتخاب نمایید", "خطا در افزودن ارجاع");
                 return;
+            }
             Sentence theSentence = null;
             using (var db = new KeywordManagementContext())
             {
                 var sentenceId = Convert.ToInt32(grdSentences.SelectedRows[0].Cells["SentenceId"].Value);
-                theSentence = db.Sentences.FirstOrDefault(sentence => sentence.SentenceId == sentenceId);
+                theSentence = db.Sentences.Include("Keyword").FirstOrDefault(sentence => sentence.SentenceId == sentenceId);
             }
-            var frmSentence = new frmSentence(theSentence, FormMode.Update);
+            var frmSentence = new frmSentence(theSentence, theSentence.Keyword, FormMode.Update);
             frmSentence.Show();
             frmSentence.FormClosed += frmSentence_FormClosed;
+        }
+
+        private void treeKeywords_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (treeKeywords.SelectedNode != null && pickedNodes.Count > 0 && e.Control)
+            {
+                IEnumerator<KeyValuePair<int, TreeNode>> enumerator;
+                TreeNode selectedNode;
+                pickedNodes.TryGetValue(((Keyword)treeKeywords.SelectedNode.Tag).KeywordId, out selectedNode);
+                switch (e.KeyCode)
+                {
+                    case Keys.Down:
+                        if (selectedNode == null)
+                        {
+                            selectedNode = pickedNodes.Values.Where(node => node == treeKeywords.SelectedNode).FirstOrDefault() ?? pickedNodes.FirstOrDefault().Value;
+                            treeKeywords.SelectedNode = selectedNode;
+                        }
+                        else
+                        {
+                            enumerator = pickedNodes.OrderBy(pickedNode => pickedNode.Value.Text).SkipWhile(pickedNode => pickedNode.Key != ((Keyword)selectedNode.Tag).KeywordId).GetEnumerator();
+                            if (enumerator.MoveNext() && enumerator.MoveNext())
+                            {
+                                treeKeywords.SelectedNode = enumerator.Current.Value;
+                            }
+                            else
+                            {
+                                treeKeywords.SelectedNode = pickedNodes.FirstOrDefault().Value;
+                            }
+                        }
+                        break;
+                }
+            }
         }
     }
 }
