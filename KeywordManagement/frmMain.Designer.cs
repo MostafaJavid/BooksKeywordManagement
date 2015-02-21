@@ -54,7 +54,7 @@
             this.ReferenceDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAddReference = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnSearchReference = new System.Windows.Forms.Button();
             this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.InsertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +65,7 @@
             this.مدیریتنویسندگانToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.خروجToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.initDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtReferenceSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -358,8 +359,9 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.txtReferenceSearch);
             this.panel3.Controls.Add(this.btnAddReference);
-            this.panel3.Controls.Add(this.button4);
+            this.panel3.Controls.Add(this.btnSearchReference);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(3, 16);
             this.panel3.Name = "panel3";
@@ -377,15 +379,16 @@
             this.btnAddReference.UseVisualStyleBackColor = true;
             this.btnAddReference.Click += new System.EventHandler(this.btnAddReference_Click);
             // 
-            // button4
+            // btnSearchReference
             // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button4.Location = new System.Drawing.Point(372, 2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "جستجو";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnSearchReference.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnSearchReference.Location = new System.Drawing.Point(372, 3);
+            this.btnSearchReference.Name = "btnSearchReference";
+            this.btnSearchReference.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchReference.TabIndex = 0;
+            this.btnSearchReference.Text = "جستجو";
+            this.btnSearchReference.UseVisualStyleBackColor = true;
+            this.btnSearchReference.Click += new System.EventHandler(this.btnSearchReference_Click);
             // 
             // treeMenu
             // 
@@ -468,6 +471,14 @@
             this.initDBToolStripMenuItem.Text = "InitDB";
             this.initDBToolStripMenuItem.Click += new System.EventHandler(this.initDBToolStripMenuItem_Click);
             // 
+            // txtReferenceSearch
+            // 
+            this.txtReferenceSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtReferenceSearch.Location = new System.Drawing.Point(453, 5);
+            this.txtReferenceSearch.Name = "txtReferenceSearch";
+            this.txtReferenceSearch.Size = new System.Drawing.Size(276, 20);
+            this.txtReferenceSearch.TabIndex = 3;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -498,6 +509,7 @@
             this.grpRefrences.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdReferences)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.treeMenu.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -528,7 +540,7 @@
         private System.Windows.Forms.DataGridView grdReferences;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnAddReference;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnSearchReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn Content;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn SentenceId;
@@ -544,6 +556,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BookTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn PageNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReferenceDescription;
+        private System.Windows.Forms.TextBox txtReferenceSearch;
     }
 }
 

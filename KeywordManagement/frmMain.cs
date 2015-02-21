@@ -80,7 +80,7 @@ namespace KeywordManagement
                 treeKeywords.Focus();
             });
         }
-        
+
         private TreeNode newTreeNode(Keyword keyword, int depth = 0, int maxDepth = 0, string keySearch = "")
         {
             if (maxDepth > 0 && depth >= maxDepth)
@@ -159,7 +159,6 @@ namespace KeywordManagement
                     }
                     e.Node.Expand();
                 }
-
             });
         }
 
@@ -170,19 +169,25 @@ namespace KeywordManagement
                 var sentenceId = Convert.ToInt32(grdSentences.SelectedRows[0].Cells["SentenceId"].Value);
                 Utils.DoWithWait(this, () =>
                 {
+                    int keywordId = 0;
                     using (var db = new KeywordManagementContext())
                     {
                         var sentence = db.Sentences.Where(s => s.SentenceId == sentenceId).Single();
-                        grdReferences.DataSource = sentence.References.Select(s => new SearchResult(s)).ToList();
-                        //var treeNode = treeKeywords.Nodes.Find(sentence.Keyword.KeywordId.ToString(), true).FirstOrDefault();
-                        //if (treeNode != null)
-                        //{
-                        //    treeKeywords.SelectedNode = treeNode;
-                        //}
+                        keywordId = sentence.Keyword.KeywordId;
+                        grdReferences.DataSource = sentence.References.Select(s => new SearchResult(s)).ToList();                        
+                    }
+                    if (treeKeywords.SelectedNode == null || treeKeywords.SelectedNode.Tag == null || keywordId != ((Keyword)treeKeywords.SelectedNode.Tag).KeywordId)
+                    {
+                        var treeNode = treeKeywords.Nodes.Find(keywordId.ToString(), true).FirstOrDefault();
+                        if (treeNode != null)
+                        {
+                            treeKeywords.AfterSelect -= this.treeKeywords_AfterSelect;
+                            treeKeywords.SelectedNode = treeNode;
+                            treeKeywords.AfterSelect += this.treeKeywords_AfterSelect;
+                        }
                     }
                 });
             }
-
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -266,20 +271,20 @@ namespace KeywordManagement
 
         private void btnSearchSentence_Click(object sender, EventArgs e)
         {
-            if (treeKeywords.SelectedNode != null && treeKeywords.SelectedNode.Tag != null)
+            using (var db = new KeywordManagementContext())
             {
-                using (var db = new KeywordManagementContext())
-                {
-                    var keyword = (Keyword)treeKeywords.SelectedNode.Tag;
-                    db.Keywords.Attach(keyword);
-                    this.grdSentences.DataSource = keyword.Sentences.Where(sentence => sentence.Content.Contains(textSentenceSearch.Text)).ToList();
-                }
+                this.grdSentences.DataSource = db.Sentences.Where(sentence => sentence.Content.Contains(textSentenceSearch.Text)).ToList();
             }
         }
 
         private void btnAddReference_Click(object sender, EventArgs e)
         {
-            if (treeKeywords.SelectedNode == null || treeKeywords.SelectedNode.Tag == null || grdSentences.SelectedRows.Count == 0)
+            if (treeKeywords.SelectedNode == null || treeKeywords.SelectedNode.Tag == null)
+            {
+                MessageBox.Show("لطفا یک کلمه انتخاب نمایید", "خطا در افزودن ارجاع");
+                return;
+            }
+            if (grdSentences.SelectedRows.Count == 0)
             {
                 MessageBox.Show("لطفا یک جلمه انتخاب نمایید", "خطا در افزودن ارجاع");
                 return;
@@ -324,6 +329,15 @@ namespace KeywordManagement
                         }
                         break;
                 }
+            }
+        }
+
+        private void btnSearchReference_Click(object sender, EventArgs e)
+        {
+            using (var db = new KeywordManagementContext())
+            {
+                var references = db.References.Where(reference => reference.Description.Contains(txtReferenceSearch.Text)).ToList();
+                this.grdReferences.DataSource = references.Select(reference => new SearchResult(reference)).ToList();
             }
         }
     }

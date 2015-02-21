@@ -109,7 +109,7 @@ namespace KeywordManagement
                                 }
                                 Reference item = new Reference
                                 {
-                                    Description = this.txtDescription.Text,
+                                    Description = this.txtAddress.Text,
                                     Sentence = this.sentence,
                                     Book = theBook
                                 };
