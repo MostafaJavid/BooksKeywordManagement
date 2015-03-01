@@ -53,6 +53,7 @@
             this.PageNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReferenceDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txtReferenceSearch = new System.Windows.Forms.TextBox();
             this.btnAddReference = new System.Windows.Forms.Button();
             this.btnSearchReference = new System.Windows.Forms.Button();
             this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -65,7 +66,8 @@
             this.مدیریتنویسندگانToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.خروجToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.initDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtReferenceSearch = new System.Windows.Forms.TextBox();
+            this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HierarchicallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -368,6 +370,14 @@
             this.panel3.Size = new System.Drawing.Size(732, 31);
             this.panel3.TabIndex = 4;
             // 
+            // txtReferenceSearch
+            // 
+            this.txtReferenceSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtReferenceSearch.Location = new System.Drawing.Point(453, 5);
+            this.txtReferenceSearch.Name = "txtReferenceSearch";
+            this.txtReferenceSearch.Size = new System.Drawing.Size(276, 20);
+            this.txtReferenceSearch.TabIndex = 3;
+            // 
             // btnAddReference
             // 
             this.btnAddReference.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -425,7 +435,8 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.منواصلیToolStripMenuItem});
+            this.منواصلیToolStripMenuItem,
+            this.ReportToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(926, 24);
@@ -471,13 +482,20 @@
             this.initDBToolStripMenuItem.Text = "InitDB";
             this.initDBToolStripMenuItem.Click += new System.EventHandler(this.initDBToolStripMenuItem_Click);
             // 
-            // txtReferenceSearch
+            // ReportToolStripMenuItem
             // 
-            this.txtReferenceSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtReferenceSearch.Location = new System.Drawing.Point(453, 5);
-            this.txtReferenceSearch.Name = "txtReferenceSearch";
-            this.txtReferenceSearch.Size = new System.Drawing.Size(276, 20);
-            this.txtReferenceSearch.TabIndex = 3;
+            this.ReportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.HierarchicallyToolStripMenuItem});
+            this.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem";
+            this.ReportToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.ReportToolStripMenuItem.Text = "گزارش";
+            // 
+            // HierarchicallyToolStripMenuItem
+            // 
+            this.HierarchicallyToolStripMenuItem.Name = "HierarchicallyToolStripMenuItem";
+            this.HierarchicallyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.HierarchicallyToolStripMenuItem.Text = "نتایج جستجو";
+            this.HierarchicallyToolStripMenuItem.Click += new System.EventHandler(this.HierarchicallyToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -557,6 +575,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PageNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReferenceDescription;
         private System.Windows.Forms.TextBox txtReferenceSearch;
+        private System.Windows.Forms.ToolStripMenuItem ReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HierarchicallyToolStripMenuItem;
     }
 }
 

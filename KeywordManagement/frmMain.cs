@@ -1,4 +1,7 @@
-﻿using KeywordManagement.Domain;
+﻿using System.Diagnostics;
+using KeywordManagement.Domain;
+using KeywordManagement.Report;
+using KeywordManagement.ReportTemplate;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +11,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Novacode;
 
 namespace KeywordManagement
 {
@@ -338,7 +342,14 @@ namespace KeywordManagement
             {
                 var references = db.References.Where(reference => reference.Description.Contains(txtReferenceSearch.Text)).ToList();
                 this.grdReferences.DataSource = references.Select(reference => new SearchResult(reference)).ToList();
-            }
+            }        
+
+        }
+
+        private void HierarchicallyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmSearchResultReport = new frmSearchResultReport(treeKeywords, grdReferences, grdSentences);
+            frmSearchResultReport.ShowDialog();
         }
     }
 }
