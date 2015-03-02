@@ -68,6 +68,7 @@
             this.initDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HierarchicallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.تغییرفونتToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -436,7 +437,8 @@
             this.menuStrip1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.منواصلیToolStripMenuItem,
-            this.ReportToolStripMenuItem});
+            this.ReportToolStripMenuItem,
+            this.تغییرفونتToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(926, 24);
@@ -497,10 +499,17 @@
             this.HierarchicallyToolStripMenuItem.Text = "نتایج جستجو";
             this.HierarchicallyToolStripMenuItem.Click += new System.EventHandler(this.HierarchicallyToolStripMenuItem_Click);
             // 
+            // تغییرفونتToolStripMenuItem
+            // 
+            this.تغییرفونتToolStripMenuItem.Name = "تغییرفونتToolStripMenuItem";
+            this.تغییرفونتToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.تغییرفونتToolStripMenuItem.Text = "تغییر فونت";
+            this.تغییرفونتToolStripMenuItem.Click += new System.EventHandler(this.تغییرفونتToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(926, 418);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.splitContainer1);
@@ -577,6 +586,7 @@
         private System.Windows.Forms.TextBox txtReferenceSearch;
         private System.Windows.Forms.ToolStripMenuItem ReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HierarchicallyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem تغییرفونتToolStripMenuItem;
     }
 }
 

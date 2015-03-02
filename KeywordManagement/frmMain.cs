@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Data.Entity;
+using System.Diagnostics;
 using KeywordManagement.Domain;
 using KeywordManagement.Report;
 using KeywordManagement.ReportTemplate;
@@ -138,6 +139,7 @@ namespace KeywordManagement
         private void CreateOrUpdateKeyword(TreeNode treeNode, FormMode formMode)
         {
             frmKeyword frm = new frmKeyword(treeNode, formMode, (keyword => { return this.newTreeNode(keyword); }));
+            frm.Font = this.Font;
             frm.Show();
         }
 
@@ -202,6 +204,7 @@ namespace KeywordManagement
         private void AuthorManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAuthor frm = new frmAuthor();
+            frm.Font = this.Font;
             frm.Show();
         }
 
@@ -214,6 +217,7 @@ namespace KeywordManagement
         private void BookManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmBookManagement frm = new frmBookManagement();
+            frm.Font = this.Font;
             frm.Show();
         }
 
@@ -253,6 +257,7 @@ namespace KeywordManagement
             }
 
             var frmSentence = new frmSentence((Keyword)treeKeywords.SelectedNode.Tag, FormMode.Create);
+            frmSentence.Font = this.Font;
             frmSentence.Show();
             frmSentence.FormClosed += frmSentence_FormClosed;
         }
@@ -277,7 +282,7 @@ namespace KeywordManagement
         {
             using (var db = new KeywordManagementContext())
             {
-                this.grdSentences.DataSource = db.Sentences.Where(sentence => sentence.Content.Contains(textSentenceSearch.Text)).ToList();
+                this.grdSentences.DataSource = db.Sentences.Where(sentence => sentence.Content.Contains(textSentenceSearch.Text)).Include("Keyword").ToList();
             }
         }
 
@@ -301,6 +306,7 @@ namespace KeywordManagement
             }
             var frmSentence = new frmSentence(theSentence, theSentence.Keyword, FormMode.Update);
             frmSentence.Show();
+            frmSentence.Font = this.Font;
             frmSentence.FormClosed += frmSentence_FormClosed;
         }
 
@@ -340,7 +346,8 @@ namespace KeywordManagement
         {
             using (var db = new KeywordManagementContext())
             {
-                var references = db.References.Where(reference => reference.Description.Contains(txtReferenceSearch.Text)).ToList();
+                var references = db.References.Where(reference => reference.Description.ToLower().Contains(txtReferenceSearch.Text.ToLower()) || 
+                                                                  reference.Book.Title.ToLower().Contains(txtReferenceSearch.Text.ToLower())).Include("Sentence.Keyword").ToList();
                 this.grdReferences.DataSource = references.Select(reference => new SearchResult(reference)).ToList();
             }        
 
@@ -349,7 +356,20 @@ namespace KeywordManagement
         private void HierarchicallyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var frmSearchResultReport = new frmSearchResultReport(treeKeywords, grdReferences, grdSentences);
+            frmSearchResultReport.Font = this.Font;
             frmSearchResultReport.ShowDialog();
+        }
+
+        private void تغییرفونتToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FontDialog myFontDialog = new FontDialog();
+            if (myFontDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Set the control's font.
+                this.Font = myFontDialog.Font;
+                menuStrip1.Font = myFontDialog.Font;
+                treeMenu.Font = myFontDialog.Font;
+            }
         }
     }
 }

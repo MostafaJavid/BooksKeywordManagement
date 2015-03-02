@@ -17,6 +17,7 @@ namespace KeywordManagement
         public string BookPublishNumber { get; set; }
         public int BookId { get; set; }
         public int ReferenceId { get; set; }
+        public Sentence Sentence { get; set; }
 
         public SearchResult()
         {
@@ -50,6 +51,7 @@ namespace KeywordManagement
             this.PageNumber = reference.PageNumber;
             this.Description = reference.Description;
             this.ReferenceId = reference.ReferenceId;
+            this.Sentence = reference.Sentence;
         }
     }
 
