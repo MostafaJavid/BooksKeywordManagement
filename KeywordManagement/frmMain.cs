@@ -152,8 +152,11 @@ namespace KeywordManagement
                 int key = Convert.ToInt32(((Keyword)e.Node.Tag).KeywordId);
                 using (var db = new KeywordManagementContext())
                 {
-                    var keyword = db.Keywords.Where(k => k.KeywordId == key).Single();
+                    var keyword = db.Keywords.Single(k => k.KeywordId == key);
                     grdSentences.DataSource = keyword.Sentences;
+                    grdReferences.DataSource = keyword.Sentences.FirstOrDefault() == null
+                        ? null
+                        : keyword.Sentences.FirstOrDefault().References.Select(reference => new SearchResult(reference)).ToList(); ;
                     if (e.Node.Nodes.Count == 0)
                     {
                         keyword.Childs.ForEach(keywordChild =>
@@ -273,6 +276,8 @@ namespace KeywordManagement
                     this.grdSentences.DataSource = keyword.Sentences;
                     this.grdSentences.ClearSelection();
                     this.grdSentences.Rows[index].Selected = true;
+
+                    this.grdReferences.DataSource = keyword.Sentences[index].References.Select(reference => new SearchResult(reference)).ToList();
                     treeKeywords.Focus();
                 }
             }
@@ -302,12 +307,15 @@ namespace KeywordManagement
             using (var db = new KeywordManagementContext())
             {
                 var sentenceId = Convert.ToInt32(grdSentences.SelectedRows[0].Cells["SentenceId"].Value);
-                theSentence = db.Sentences.Include("Keyword").FirstOrDefault(sentence => sentence.SentenceId == sentenceId);
+                theSentence = db.Sentences.Include("Keyword")
+                                          .Include("References")
+                                          .Include("References.Book")
+                                          .Include("References.Book.Authors").FirstOrDefault(sentence => sentence.SentenceId == sentenceId);
             }
             var frmSentence = new frmSentence(theSentence, theSentence.Keyword, FormMode.Update);
-            frmSentence.Show();
             frmSentence.Font = this.Font;
             frmSentence.FormClosed += frmSentence_FormClosed;
+            frmSentence.ShowDialog();            
         }
 
         private void treeKeywords_KeyDown(object sender, KeyEventArgs e)
@@ -360,9 +368,10 @@ namespace KeywordManagement
             frmSearchResultReport.ShowDialog();
         }
 
-        private void تغییرفونتToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ChangeFontToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FontDialog myFontDialog = new FontDialog();
+            myFontDialog.Font = this.Font;
             if (myFontDialog.ShowDialog() == DialogResult.OK)
             {
                 // Set the control's font.

@@ -30,6 +30,8 @@ namespace KeywordManagement
         }
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSentence));
             this.label1 = new System.Windows.Forms.Label();
             this.txtSentence = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,6 +46,15 @@ namespace KeywordManagement
             this.label6 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnAddReference = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.btnRemoveReference = new System.Windows.Forms.Button();
+            this.btnEditReference = new System.Windows.Forms.Button();
+            this.grdReferences = new System.Windows.Forms.DataGridView();
+            this.BookTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReferenceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.grdReferences)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -173,10 +184,10 @@ namespace KeywordManagement
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(12, 122);
+            this.txtAddress.Location = new System.Drawing.Point(12, 114);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(571, 226);
+            this.txtAddress.Size = new System.Drawing.Size(571, 26);
             this.txtAddress.TabIndex = 5;
             // 
             // label4
@@ -184,17 +195,108 @@ namespace KeywordManagement
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(555, 104);
+            this.label4.Location = new System.Drawing.Point(555, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(33, 13);
             this.label4.TabIndex = 12;
             this.label4.Text = "آدرس:";
+            // 
+            // btnAddReference
+            // 
+            this.btnAddReference.ImageKey = "iconmonstr-plus-2-icon-256.png";
+            this.btnAddReference.ImageList = this.imageList1;
+            this.btnAddReference.Location = new System.Drawing.Point(551, 151);
+            this.btnAddReference.Name = "btnAddReference";
+            this.btnAddReference.Size = new System.Drawing.Size(30, 28);
+            this.btnAddReference.TabIndex = 13;
+            this.btnAddReference.UseVisualStyleBackColor = true;
+            this.btnAddReference.Click += new System.EventHandler(this.btnAddReference_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "iconmonstr-plus-2-icon-256.png");
+            this.imageList1.Images.SetKeyName(1, "iconmonstr-minus-2-icon-256.png");
+            this.imageList1.Images.SetKeyName(2, "iconmonstr-pencil-8-icon-256.png");
+            // 
+            // btnRemoveReference
+            // 
+            this.btnRemoveReference.Enabled = false;
+            this.btnRemoveReference.ImageIndex = 1;
+            this.btnRemoveReference.ImageList = this.imageList1;
+            this.btnRemoveReference.Location = new System.Drawing.Point(479, 151);
+            this.btnRemoveReference.Name = "btnRemoveReference";
+            this.btnRemoveReference.Size = new System.Drawing.Size(30, 28);
+            this.btnRemoveReference.TabIndex = 14;
+            this.btnRemoveReference.UseVisualStyleBackColor = true;
+            this.btnRemoveReference.Visible = false;
+            // 
+            // btnEditReference
+            // 
+            this.btnEditReference.ImageKey = "iconmonstr-pencil-8-icon-256.png";
+            this.btnEditReference.ImageList = this.imageList1;
+            this.btnEditReference.Location = new System.Drawing.Point(515, 151);
+            this.btnEditReference.Name = "btnEditReference";
+            this.btnEditReference.Size = new System.Drawing.Size(30, 28);
+            this.btnEditReference.TabIndex = 15;
+            this.btnEditReference.UseVisualStyleBackColor = true;
+            this.btnEditReference.Click += new System.EventHandler(this.btnEditReference_Click);
+            // 
+            // grdReferences
+            // 
+            this.grdReferences.AllowUserToAddRows = false;
+            this.grdReferences.AllowUserToDeleteRows = false;
+            this.grdReferences.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdReferences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdReferences.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.BookTitle,
+            this.Description,
+            this.ReferenceId});
+            this.grdReferences.Location = new System.Drawing.Point(12, 185);
+            this.grdReferences.Name = "grdReferences";
+            this.grdReferences.ReadOnly = true;
+            this.grdReferences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdReferences.Size = new System.Drawing.Size(571, 173);
+            this.grdReferences.TabIndex = 16;
+            this.grdReferences.SelectionChanged += new System.EventHandler(this.grdReferences_SelectionChanged);
+            // 
+            // BookTitle
+            // 
+            this.BookTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.BookTitle.DataPropertyName = "BookTitle";
+            this.BookTitle.HeaderText = "نام کتاب";
+            this.BookTitle.Name = "BookTitle";
+            this.BookTitle.ReadOnly = true;
+            this.BookTitle.Width = 71;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Description.DataPropertyName = "Description";
+            this.Description.HeaderText = "آدرس";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
+            // ReferenceId
+            // 
+            this.ReferenceId.DataPropertyName = "ReferenceId";
+            this.ReferenceId.HeaderText = "ReferenceId";
+            this.ReferenceId.Name = "ReferenceId";
+            this.ReferenceId.ReadOnly = true;
+            this.ReferenceId.Visible = false;
             // 
             // frmSentence
             // 
             this.AcceptButton = this.bntSave;
             this.CancelButton = this.btnCancle;
             this.ClientSize = new System.Drawing.Size(598, 514);
+            this.Controls.Add(this.grdReferences);
+            this.Controls.Add(this.btnEditReference);
+            this.Controls.Add(this.btnRemoveReference);
+            this.Controls.Add(this.btnAddReference);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtKeyword);
@@ -212,6 +314,7 @@ namespace KeywordManagement
             this.Name = "frmSentence";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Text = "ثبت ارجاع";
+            ((System.ComponentModel.ISupportInitialize)(this.grdReferences)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,5 +326,13 @@ namespace KeywordManagement
         private Label label6;
         private TextBox txtAddress;
         private Label label4;
+        private Button btnAddReference;
+        private Button btnRemoveReference;
+        private Button btnEditReference;
+        private ImageList imageList1;
+        private DataGridView grdReferences;
+        private DataGridViewTextBoxColumn BookTitle;
+        private DataGridViewTextBoxColumn Description;
+        private DataGridViewTextBoxColumn ReferenceId;
     }
 }

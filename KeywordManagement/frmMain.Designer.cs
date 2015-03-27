@@ -49,9 +49,6 @@
             this.btnSearchSentence = new System.Windows.Forms.Button();
             this.grpRefrences = new System.Windows.Forms.GroupBox();
             this.grdReferences = new System.Windows.Forms.DataGridView();
-            this.BookTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PageNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ReferenceDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtReferenceSearch = new System.Windows.Forms.TextBox();
             this.btnAddReference = new System.Windows.Forms.Button();
@@ -68,7 +65,9 @@
             this.initDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HierarchicallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.تغییرفونتToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ChangeFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BookTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReferenceDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -159,9 +158,9 @@
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Location = new System.Drawing.Point(3, 16);
+            this.textBox1.Location = new System.Drawing.Point(3, 18);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(178, 20);
+            this.textBox1.Size = new System.Drawing.Size(178, 22);
             this.textBox1.TabIndex = 0;
             this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
             // 
@@ -181,10 +180,10 @@
             // 
             this.treeKeywords.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeKeywords.HideSelection = false;
-            this.treeKeywords.Location = new System.Drawing.Point(3, 16);
+            this.treeKeywords.Location = new System.Drawing.Point(3, 18);
             this.treeKeywords.Name = "treeKeywords";
             this.treeKeywords.RightToLeftLayout = true;
-            this.treeKeywords.Size = new System.Drawing.Size(178, 293);
+            this.treeKeywords.Size = new System.Drawing.Size(178, 291);
             this.treeKeywords.TabIndex = 1;
             this.treeKeywords.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeKeywords_AfterSelect);
             this.treeKeywords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeKeywords_KeyDown);
@@ -231,11 +230,11 @@
             this.Description,
             this.SentenceId});
             this.grdSentences.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdSentences.Location = new System.Drawing.Point(3, 47);
+            this.grdSentences.Location = new System.Drawing.Point(3, 49);
             this.grdSentences.Name = "grdSentences";
             this.grdSentences.ReadOnly = true;
             this.grdSentences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdSentences.Size = new System.Drawing.Size(732, 160);
+            this.grdSentences.Size = new System.Drawing.Size(732, 158);
             this.grdSentences.TabIndex = 4;
             this.grdSentences.SelectionChanged += new System.EventHandler(this.grdSentences_SelectionChanged);
             // 
@@ -246,7 +245,7 @@
             this.Content.HeaderText = "جمله";
             this.Content.Name = "Content";
             this.Content.ReadOnly = true;
-            this.Content.Width = 52;
+            this.Content.Width = 58;
             // 
             // Description
             // 
@@ -270,7 +269,7 @@
             this.panel2.Controls.Add(this.btnAddSentence);
             this.panel2.Controls.Add(this.btnSearchSentence);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 16);
+            this.panel2.Location = new System.Drawing.Point(3, 18);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(732, 31);
             this.panel2.TabIndex = 3;
@@ -280,7 +279,7 @@
             this.textSentenceSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textSentenceSearch.Location = new System.Drawing.Point(453, 5);
             this.textSentenceSearch.Name = "textSentenceSearch";
-            this.textSentenceSearch.Size = new System.Drawing.Size(276, 20);
+            this.textSentenceSearch.Size = new System.Drawing.Size(276, 22);
             this.textSentenceSearch.TabIndex = 2;
             // 
             // btnAddSentence
@@ -324,41 +323,14 @@
             this.grdReferences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdReferences.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.BookTitle,
-            this.PageNumber,
             this.ReferenceDescription});
             this.grdReferences.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdReferences.Location = new System.Drawing.Point(3, 47);
+            this.grdReferences.Location = new System.Drawing.Point(3, 49);
             this.grdReferences.Name = "grdReferences";
             this.grdReferences.ReadOnly = true;
             this.grdReferences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdReferences.Size = new System.Drawing.Size(732, 127);
+            this.grdReferences.Size = new System.Drawing.Size(732, 125);
             this.grdReferences.TabIndex = 5;
-            // 
-            // BookTitle
-            // 
-            this.BookTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.BookTitle.DataPropertyName = "BookTitle";
-            this.BookTitle.HeaderText = "نام کتاب";
-            this.BookTitle.Name = "BookTitle";
-            this.BookTitle.ReadOnly = true;
-            this.BookTitle.Width = 71;
-            // 
-            // PageNumber
-            // 
-            this.PageNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.PageNumber.DataPropertyName = "PageNumber";
-            this.PageNumber.HeaderText = "شماره صفحه";
-            this.PageNumber.Name = "PageNumber";
-            this.PageNumber.ReadOnly = true;
-            this.PageNumber.Width = 90;
-            // 
-            // ReferenceDescription
-            // 
-            this.ReferenceDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ReferenceDescription.DataPropertyName = "Description";
-            this.ReferenceDescription.HeaderText = "آدرس";
-            this.ReferenceDescription.Name = "ReferenceDescription";
-            this.ReferenceDescription.ReadOnly = true;
             // 
             // panel3
             // 
@@ -366,7 +338,7 @@
             this.panel3.Controls.Add(this.btnAddReference);
             this.panel3.Controls.Add(this.btnSearchReference);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(3, 16);
+            this.panel3.Location = new System.Drawing.Point(3, 18);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(732, 31);
             this.panel3.TabIndex = 4;
@@ -376,7 +348,7 @@
             this.txtReferenceSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtReferenceSearch.Location = new System.Drawing.Point(453, 5);
             this.txtReferenceSearch.Name = "txtReferenceSearch";
-            this.txtReferenceSearch.Size = new System.Drawing.Size(276, 20);
+            this.txtReferenceSearch.Size = new System.Drawing.Size(276, 22);
             this.txtReferenceSearch.TabIndex = 3;
             // 
             // btnAddReference
@@ -438,7 +410,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.منواصلیToolStripMenuItem,
             this.ReportToolStripMenuItem,
-            this.تغییرفونتToolStripMenuItem});
+            this.ChangeFontToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(926, 24);
@@ -495,16 +467,33 @@
             // HierarchicallyToolStripMenuItem
             // 
             this.HierarchicallyToolStripMenuItem.Name = "HierarchicallyToolStripMenuItem";
-            this.HierarchicallyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.HierarchicallyToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.HierarchicallyToolStripMenuItem.Text = "نتایج جستجو";
             this.HierarchicallyToolStripMenuItem.Click += new System.EventHandler(this.HierarchicallyToolStripMenuItem_Click);
             // 
-            // تغییرفونتToolStripMenuItem
+            // ChangeFontToolStripMenuItem
             // 
-            this.تغییرفونتToolStripMenuItem.Name = "تغییرفونتToolStripMenuItem";
-            this.تغییرفونتToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.تغییرفونتToolStripMenuItem.Text = "تغییر فونت";
-            this.تغییرفونتToolStripMenuItem.Click += new System.EventHandler(this.تغییرفونتToolStripMenuItem_Click);
+            this.ChangeFontToolStripMenuItem.Name = "ChangeFontToolStripMenuItem";
+            this.ChangeFontToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.ChangeFontToolStripMenuItem.Text = "تغییر فونت";
+            this.ChangeFontToolStripMenuItem.Click += new System.EventHandler(this.ChangeFontToolStripMenuItem_Click);
+            // 
+            // BookTitle
+            // 
+            this.BookTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.BookTitle.DataPropertyName = "BookTitle";
+            this.BookTitle.HeaderText = "نام کتاب";
+            this.BookTitle.Name = "BookTitle";
+            this.BookTitle.ReadOnly = true;
+            this.BookTitle.Width = 74;
+            // 
+            // ReferenceDescription
+            // 
+            this.ReferenceDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ReferenceDescription.DataPropertyName = "Description";
+            this.ReferenceDescription.HeaderText = "آدرس";
+            this.ReferenceDescription.Name = "ReferenceDescription";
+            this.ReferenceDescription.ReadOnly = true;
             // 
             // frmMain
             // 
@@ -513,6 +502,7 @@
             this.ClientSize = new System.Drawing.Size(926, 418);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.splitContainer1);
+            this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -580,13 +570,12 @@
         private System.Windows.Forms.ToolStripMenuItem RemoveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem InsertToolStripMenuItem;
         private System.Windows.Forms.TextBox textSentenceSearch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BookTitle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PageNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ReferenceDescription;
         private System.Windows.Forms.TextBox txtReferenceSearch;
         private System.Windows.Forms.ToolStripMenuItem ReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HierarchicallyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem تغییرفونتToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ChangeFontToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BookTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReferenceDescription;
     }
 }
 

@@ -50,6 +50,18 @@ namespace KeywordManagement
         public virtual Sentence Sentence { get; set; }
         public int BookId { get; set; }
         public virtual Book Book { get; set; }
+
+        public static Reference CreateNewReference(String bookTitle, String authorName, String address)
+        {
+            Reference reference;
+                
+                reference = new Reference
+                {
+                    Description = address,
+                    Book = Book.CreateNewBook(bookTitle, authorName)
+                };
+            return reference;
+        }
     }
 
     public class Book
@@ -69,6 +81,40 @@ namespace KeywordManagement
         
         public virtual List<Reference> References { get; set; }
         public virtual List<Author> Authors { get; set; }
+
+        public static Book CreateNewBook(String bookTitle, String authorName, Reference reference = null)
+        {
+            Book theBook;
+            using (var keywordManagementContext = new KeywordManagementContext())
+            {
+                theBook = keywordManagementContext.Books.Include("Authors").FirstOrDefault((Book book) => book.Title == bookTitle);
+                Author theAuthor;
+                if (theBook == null)
+                {
+                    if (
+                        (theAuthor =
+                            keywordManagementContext.Authors.FirstOrDefault(
+                                (Author author) => author.FullName == authorName)) == null)
+                    {
+                        theAuthor = new Author
+                        {
+                            FullName = authorName
+                        };
+                    }
+                    theBook = new Book
+                    {
+                        Title = bookTitle
+                    };
+                    theAuthor.Books.Add(theBook);
+                    theBook.Authors.Add(theAuthor);
+                }
+                if (reference != null)
+                {
+                    theBook.References.Add(reference);                    
+                }
+            }
+            return theBook;
+        }
     }
 
     public class Author
