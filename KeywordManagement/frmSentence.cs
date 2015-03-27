@@ -70,7 +70,6 @@ namespace KeywordManagement
                                         PageNumber = searchResult.PageNumber,
                                         Sentence = newSentence
                                     };
-                                    keywordManagementContext.Books.Attach(reference.Book);                                        
                                     newSentence.References.Add(reference);
                                     newSentence.Description = txtDescription.Text;
                                 }

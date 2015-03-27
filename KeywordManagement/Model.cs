@@ -107,11 +107,13 @@ namespace KeywordManagement
                     };
                     theAuthor.Books.Add(theBook);
                     theBook.Authors.Add(theAuthor);
+                    keywordManagementContext.SaveChanges();
                 }
                 if (reference != null)
                 {
                     theBook.References.Add(reference);                    
                 }
+
             }
             return theBook;
         }
