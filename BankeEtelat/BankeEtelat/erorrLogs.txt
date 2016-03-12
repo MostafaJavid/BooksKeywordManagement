@@ -1,1 +1,0 @@
-1394-08-29	14:51:11	sql erorr: near "AND": syntax error	query: DELETE  From  KeywordTreeRelates Where ParentBook = 9999999990 AND ParentText = AND ParentSub = 1 AND ParentKey = 1 ;
